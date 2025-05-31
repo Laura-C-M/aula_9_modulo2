@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox, PhotoImage
+from tkinter import messagebox
+from PIL import Image, ImageTk
 
 def calcular_imc(peso, altura):
     try:
@@ -22,16 +23,17 @@ def mostrar_imc():
 
 def exibir_imagem_imc(imc):
     if imc < 18.5:
-        caminho_imagem = "bmi1.gif"  # Substitua pelo caminho da sua imagem de baixo peso
+        caminho_imagem = "bmi1.jpg"
     elif 18.5 <= imc < 24.9:
-        caminho_imagem = "bmi2.gif"  # Substitua pelo caminho da sua imagem de peso normal
+        caminho_imagem = "bmi2.jpg"
     elif 25 <= imc < 29.9:
-        caminho_imagem = "bmi3.gif"  # Substitua pelo caminho da sua imagem de sobrepeso
+        caminho_imagem = "bmi3.jpg"
     else:
-        caminho_imagem = "bmi4.gif"  # Substitua pelo caminho da sua imagem de obesidade
+        caminho_imagem = "bmi4.jpg"
 
     try:
-        img = PhotoImage(file=caminho_imagem)
+        img = Image.open(caminho_imagem)
+        img = ImageTk.PhotoImage(img)
         label_imagem.config(image=img)
         label_imagem.image = img
     except Exception as e:
